@@ -112,6 +112,7 @@ export default function EventList() {
                                 <tr key={event.id} className="border-t hover:bg-gray-50">
                                     <td className="p-4 text-gray-600">{index + 1}</td>
                                     <td className="p-4 font-medium text-gray-800">{event.name}</td>
+                                    <td className="p-4 text-gray-600">{getSpeakerName(event.speakerId)}</td>
                                     <td className="p-4">
                                         <span className="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-1 rounded-full">
                                             {getCategoryName(event.categoryId)}
@@ -126,7 +127,7 @@ export default function EventList() {
                                         })}
                                     </td>
                                     <td className="p-4 text-gray-600 max-w-xs truncate">{event.description}</td>
-                                    <td className="p-4 text-gray-600">{getSpeakerName(event.speakerId)}</td>
+        
                                     <td className="p-4">
                                         <div className="flex gap-2">
                                             <Link
