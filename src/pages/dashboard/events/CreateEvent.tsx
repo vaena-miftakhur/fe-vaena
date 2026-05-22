@@ -29,13 +29,13 @@ export default function CreateEvent() {
     });
 
     useEffect(() => {
-        fetch("http://localhost:3000/categories")
+        fetch("https://be-v-production.up.railway.app/events")
             .then(res => res.json())
             .then(data => setCategories(data));
     }, []);
 
     const onSubmit = async (data: FormData) => {
-        await fetch("http://localhost:3000/events", {
+        await fetch("https://be-v-production.up.railway.app/events", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
