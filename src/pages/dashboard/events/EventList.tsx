@@ -6,6 +6,11 @@ interface Category {
     name: string;
 }
 
+interface Speaker {
+    id: number;
+    name: string;
+}
+
 interface Event {
     id: number;
     name: string;
@@ -14,11 +19,13 @@ interface Event {
     dateEvent: string;
     description: string;
     createdAt: string;
+    speakerId: number; 
 }
 
 export default function EventList() {
     const [events, setEvents] = useState<Event[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [speakers, setSpeakers] = useState<Speaker[]>([]);
     const [loading, setLoading] = useState(true);
 
     const fetchData = async () => {
@@ -26,11 +33,14 @@ export default function EventList() {
             const [eventsRes, categoriesRes] = await Promise.all([
                 fetch("https://be-v-production.up.railway.app/events"),
                 fetch("https://be-v-production.up.railway.app/categories"),
+                fetch("https://be-v-production.up.railway.app/speakers"),
             ]);
             const eventsData = await eventsRes.json();
             const categoriesData = await categoriesRes.json();
+            const speakersData = await speakersRes.json();
             setEvents(eventsData);
             setCategories(categoriesData);
+            setSpeakers(speakersData);
         } catch (err) {
             console.error("Gagal fetch data:", err);
         } finally {
@@ -41,6 +51,11 @@ export default function EventList() {
     const getCategoryName = (categoryId: number) => {
         const category = categories.find(c => c.id === categoryId);
         return category ? category.name : `ID: ${categoryId}`;
+    };
+
+    const getSpeakerName = (speakerId: number) => {
+        const speaker = speakers.find(s => s.id === speakerId);
+        return speaker ? speaker.name : "-";
     };
 
     const handleDelete = async (id: number) => {
@@ -71,6 +86,7 @@ export default function EventList() {
                         <tr>
                             <th className="text-left p-4 text-gray-600">No</th>
                             <th className="text-left p-4 text-gray-600">Nama Event</th>
+                            <th className="text-left p-4 text-gray-600">Pembicara</th>
                             <th className="text-left p-4 text-gray-600">Kategori</th>
                             <th className="text-left p-4 text-gray-600">Lokasi</th>
                             <th className="text-left p-4 text-gray-600">Tanggal</th>
@@ -110,6 +126,7 @@ export default function EventList() {
                                         })}
                                     </td>
                                     <td className="p-4 text-gray-600 max-w-xs truncate">{event.description}</td>
+                                    <td className="p-4 text-gray-600">{getSpeakerName(event.speakerId)}</td>
                                     <td className="p-4">
                                         <div className="flex gap-2">
                                             <Link
