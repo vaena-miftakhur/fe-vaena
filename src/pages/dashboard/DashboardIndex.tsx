@@ -14,9 +14,9 @@ export default function DashboardIndex() {
         };
 
         Promise.all([
-            fetch("http://localhost:3000/categories", { headers }).then(r => r.json()),
-            fetch("http://localhost:3000/speakers", { headers }).then(r => r.json()),
-            fetch("http://localhost:3000/events", { headers }).then(r => r.json()),
+            fetch("https://be-v-production.up.railway.app/categories", { headers }).then(r => r.json()),
+            fetch("https://be-v-production.up.railway.app/speakers", { headers }).then(r => r.json()),
+            fetch("https://be-v-production.up.railway.app/events", { headers }).then(r => r.json()),
         ])
         .then(([categories, speakers, events]) => {
             console.log("categories:", categories);
