@@ -20,7 +20,7 @@ export default function CreateSpeaker() {
     });
 
     const onSubmit = async (data: FormData) => {
-        await fetch("http://localhost:3000/speakers", {
+        await fetch("https://be-v-production.up.railway.app/speakers", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
