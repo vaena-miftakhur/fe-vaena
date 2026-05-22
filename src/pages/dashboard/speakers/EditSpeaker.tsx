@@ -32,7 +32,7 @@ export default function EditSpeaker() {
     }, [id]);
 
     const onSubmit = async (data: FormData) => {
-        await fetch(`http://localhost:3000/speakers/${id}`, {
+        await fetch(`https://be-v-production.up.railway.app/speakers${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
