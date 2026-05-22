@@ -54,7 +54,7 @@ export default function EditEvent() {
     }, [id]);
 
     const onSubmit = async (data: FormData) => {
-        await fetch(`https://be-v-production.up.railway.app/events${id}`, {
+        await fetch(`https://be-v-production.up.railway.app/events/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
