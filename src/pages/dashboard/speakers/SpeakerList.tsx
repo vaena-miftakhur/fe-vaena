@@ -15,7 +15,7 @@ export default function SpeakerList() {
 
     const fetchSpeakers = async () => {
         try {
-            const res = await fetch("http://localhost:3000/speakers");
+            const res = await fetch("https://be-v-production.up.railway.app/speakers");
             const data = await res.json();
             setSpeakers(data);
         } catch (err) {
@@ -27,7 +27,7 @@ export default function SpeakerList() {
 
     const handleDelete = async (id: number) => {
         if (!confirm("Yakin hapus speaker ini?")) return;
-        await fetch(`http://localhost:3000/speakers/${id}`, { method: "DELETE" });
+        await fetch(`https://be-v-production.up.railway.app/speakers/${id}`, { method: "DELETE" });
         fetchSpeakers();
     };
 
