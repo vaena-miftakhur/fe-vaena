@@ -9,6 +9,7 @@ import { Button } from "../../../components/ui/Button";
 const schema = z.object({
     name: z.string().min(1, "Nama tidak boleh kosong"),
     categoryId: z.string().min(1, "Category wajib dipilih"),
+    speakerId: z.string().min(1, "Pembicara wajib dipilih"), 
     location: z.string().min(1, "Lokasi tidak boleh kosong"),
     dateEvent: z.string().min(1, "Tanggal tidak boleh kosong"),
     description: z.string().min(1, "Deskripsi tidak boleh kosong"),
@@ -21,10 +22,16 @@ interface Category {
     name: string;
 }
 
+interface Speaker {
+    id: number;
+    name: string;
+}
+
 export default function EditEvent() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [categories, setCategories] = useState<Category[]>([]);
+    const [speakers, setSpeakers] = useState<Speaker[]>([]);
     const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({
         resolver: zodResolver(schema),
     });
@@ -39,6 +46,7 @@ export default function EditEvent() {
             .then(data => {
                 setValue("name", data.name);
                 setValue("categoryId", String(data.categoryId));
+                setValue("speakerId", String(eventData.speakerId));
                 setValue("location", data.location);
                 setValue("dateEvent", data.dateEvent.split("T")[0]);
                 setValue("description", data.description);
@@ -71,6 +79,17 @@ export default function EditEvent() {
                             ))}
                         </select>
                         {errors.categoryId && <p className="text-red-500 text-sm">{errors.categoryId.message}</p>}
+                    </div>
+
+                    <div className="flex flex-col gap-2 mb-3">
+                        <label className="font-medium">Pembicara</label>
+                        <select {...register("speakerId")} className="p-2 border border-black rounded w-full focus:outline-none focus:ring-2 focus:ring-gray-400">
+                            <option value="">Pilih Pembicara</option>
+                            {speakers.map(spk => (
+                                <option key={spk.id} value={spk.id}>{spk.name}</option>
+                            ))}
+                        </select>
+                        {errors.speakerId && <p className="text-red-500 text-sm">{errors.speakerId.message}</p>}
                     </div>
 
                     <FormInput label="Lokasi" name="location" register={register} error={errors.location?.message} type="text" />
