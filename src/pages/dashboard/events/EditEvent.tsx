@@ -32,7 +32,7 @@ export default function EditEvent() {
     const navigate = useNavigate();
     const [categories, setCategories] = useState<Category[]>([]);
     const [speakers, setSpeakers] = useState<Speaker[]>([]);
-    const { register, handleSubmit, setValue, reset, formState: { errors, isSubmitting } } = useForm<FormData>({
+    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormData>({
         resolver: zodResolver(schema),
     });
 
