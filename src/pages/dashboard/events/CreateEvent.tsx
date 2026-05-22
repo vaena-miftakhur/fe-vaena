@@ -29,7 +29,7 @@ export default function CreateEvent() {
     });
 
     useEffect(() => {
-        fetch("https://be-v-production.up.railway.app/events")
+        fetch("https://be-v-production.up.railway.app/categories")
             .then(res => res.json())
             .then(data => setCategories(data));
     }, []);
