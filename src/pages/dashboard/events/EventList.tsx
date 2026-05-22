@@ -14,12 +14,12 @@ interface Speaker {
 interface Event {
     id: number;
     name: string;
+    speakerId: number;
     categoryId: number;
     location: string;
     dateEvent: string;
     description: string;
-    createdAt: string;
-    speakerId: number; 
+    createdAt: string; 
 }
 
 export default function EventList() {
