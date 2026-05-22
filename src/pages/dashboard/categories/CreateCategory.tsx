@@ -18,7 +18,7 @@ export default function CreateCategory() {
     });
 
     const onSubmit = async (data: FormData) => {
-        await fetch("http://localhost:3000/categories", {
+        await fetch("https://be-v-production.up.railway.app/categories", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
