@@ -10,14 +10,14 @@ export default function CategoryList() {
     const [categories, setCategories] = useState<Category[]>([]);
 
     const fetchCategories = async () => {
-        const res = await fetch("http://localhost:3000/categories");
+        const res = await fetch("https://be-v-production.up.railway.app/categories");
         const data = await res.json();
         setCategories(data);
     };
 
     const handleDelete = async (id: number) => {
         if (!confirm("Yakin hapus category ini?")) return;
-        await fetch(`http://localhost:3000/categories/${id}`, { method: "DELETE" });
+        await fetch(`https://be-v-production.up.railway.app/categories/${id}`, { method: "DELETE" });
         fetchCategories();
     };
 
