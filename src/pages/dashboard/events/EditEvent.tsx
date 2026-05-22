@@ -32,7 +32,7 @@ export default function EditEvent() {
     const navigate = useNavigate();
     const [categories, setCategories] = useState<Category[]>([]);
     const [speakers, setSpeakers] = useState<Speaker[]>([]);
-    const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({
+    const { register, handleSubmit, setValue, reset, formState: { errors, isSubmitting } } = useForm<FormData>({
         resolver: zodResolver(schema),
     });
 
@@ -42,14 +42,14 @@ export default function EditEvent() {
             fetch("https://be-v-production.up.railway.app/speakers").then(r => r.json()),
             fetch(`https://be-v-production.up.railway.app/events/${id}`).then(r => r.json()),
         ]).then(([catData, spkData, eventData]) => {
-            setCategories(catData);
-            setSpeakers(spkData);
-            setValue("name", eventData.name);
-            setValue("categoryId", String(eventData.categoryId));
-            setValue("speakerId", String(eventData.speakerId));
-            setValue("location", eventData.location);
-            setValue("dateEvent", eventData.dateEvent.split("T")[0]);
-            setValue("description", eventData.description);
+            reset({
+                name: eventData.name,
+                categoryId: String(eventData.categoryId),
+                speakerId: String(eventData.speakerId),
+                location: eventData.location,
+                dateEvent: eventData.dateEvent.split("T")[0],
+                description: eventData.description,
+            });
         });
     }, [id]);
 
@@ -72,7 +72,8 @@ export default function EditEvent() {
 
                     <div className="flex flex-col gap-2 mb-3">
                         <label className="font-medium">Category</label>
-                        <select {...register("categoryId")} className="p-2 border border-black rounded w-full focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <select {...register("categoryId")} 
+                            className="p-2 border border-black rounded w-full focus:outline-none focus:ring-2 focus:ring-gray-400">
                             <option value="">Pilih Category</option>
                             {categories.map(cat => (
                                 <option key={cat.id} value={cat.id}>{cat.name}</option>
