@@ -37,20 +37,20 @@ export default function EditEvent() {
     });
 
     useEffect(() => {
-        fetch("https://be-v-production.up.railway.app/categories")
-            .then(res => res.json())
-            .then(data => setCategories(data));
-
-        fetch(`https://be-v-production.up.railway.app/events/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                setValue("name", data.name);
-                setValue("categoryId", String(data.categoryId));
-                setValue("speakerId", String(eventData.speakerId));
-                setValue("location", data.location);
-                setValue("dateEvent", data.dateEvent.split("T")[0]);
-                setValue("description", data.description);
-            });
+        Promise.all([
+            fetch("https://be-v-production.up.railway.app/categories").then(r => r.json()),
+            fetch("https://be-v-production.up.railway.app/speakers").then(r => r.json()),
+            fetch(`https://be-v-production.up.railway.app/events/${id}`).then(r => r.json()),
+        ]).then(([catData, spkData, eventData]) => {
+            setCategories(catData);
+            setSpeakers(spkData);
+            setValue("name", eventData.name);
+            setValue("categoryId", String(eventData.categoryId));
+            setValue("speakerId", String(eventData.speakerId));
+            setValue("location", eventData.location);
+            setValue("dateEvent", eventData.dateEvent.split("T")[0]);
+            setValue("description", eventData.description);
+        });
     }, [id]);
 
     const onSubmit = async (data: FormData) => {
