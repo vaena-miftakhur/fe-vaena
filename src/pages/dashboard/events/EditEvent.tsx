@@ -30,11 +30,11 @@ export default function EditEvent() {
     });
 
     useEffect(() => {
-        fetch("http://localhost:3000/categories")
+        fetch("https://be-v-production.up.railway.app/categories")
             .then(res => res.json())
             .then(data => setCategories(data));
 
-        fetch(`http://localhost:3000/events/${id}`)
+        fetch(`https://be-v-production.up.railway.app/events${id}`)
             .then(res => res.json())
             .then(data => {
                 setValue("name", data.name);
@@ -46,7 +46,7 @@ export default function EditEvent() {
     }, [id]);
 
     const onSubmit = async (data: FormData) => {
-        await fetch(`http://localhost:3000/events/${id}`, {
+        await fetch(`https://be-v-production.up.railway.app/events${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
