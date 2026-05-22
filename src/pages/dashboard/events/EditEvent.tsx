@@ -34,7 +34,7 @@ export default function EditEvent() {
             .then(res => res.json())
             .then(data => setCategories(data));
 
-        fetch(`https://be-v-production.up.railway.app/events${id}`)
+        fetch(`https://be-v-production.up.railway.app/events/${id}`)
             .then(res => res.json())
             .then(data => {
                 setValue("name", data.name);
