@@ -20,13 +20,13 @@ export default function EditCategory() {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:3000/categories/${id}`)
+        fetch(`https://be-v-production.up.railway.app/categories${id}`)
             .then(res => res.json())
             .then(data => setValue("name", data.name));
     }, [id]);
 
     const onSubmit = async (data: FormData) => {
-        await fetch(`http://localhost:3000/categories/${id}`, {
+        await fetch(`https://be-v-production.up.railway.app/categories${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
