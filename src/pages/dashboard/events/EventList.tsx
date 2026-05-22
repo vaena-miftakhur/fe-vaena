@@ -24,8 +24,8 @@ export default function EventList() {
     const fetchData = async () => {
         try {
             const [eventsRes, categoriesRes] = await Promise.all([
-                fetch("http://localhost:3000/events"),
-                fetch("http://localhost:3000/categories"),
+                fetch("https://be-v-production.up.railway.app/events"),
+                fetch("https://be-v-production.up.railway.app/categories"),
             ]);
             const eventsData = await eventsRes.json();
             const categoriesData = await categoriesRes.json();
@@ -45,7 +45,7 @@ export default function EventList() {
 
     const handleDelete = async (id: number) => {
         if (!confirm("Yakin hapus event ini?")) return;
-        await fetch(`http://localhost:3000/events/${id}`, { method: "DELETE" });
+        await fetch(`https://be-v-production.up.railway.app/events/${id}`, { method: "DELETE" });
         fetchData();
     };
 
