@@ -30,7 +30,7 @@ export default function EventList() {
 
     const fetchData = async () => {
         try {
-            const [eventsRes, categoriesRes] = await Promise.all([
+            const [eventsRes, categoriesRes,speakersRes] = await Promise.all([
                 fetch("https://be-v-production.up.railway.app/events"),
                 fetch("https://be-v-production.up.railway.app/categories"),
                 fetch("https://be-v-production.up.railway.app/speakers"),
