@@ -42,6 +42,8 @@ export default function EditEvent() {
             fetch("https://be-v-production.up.railway.app/speakers").then(r => r.json()),
             fetch(`https://be-v-production.up.railway.app/events/${id}`).then(r => r.json()),
         ]).then(([catData, spkData, eventData]) => {
+            setCategories(catData);  // ← ini hilang
+            setSpeakers(spkData);    // ← ini hilang
             reset({
                 name: eventData.name,
                 categoryId: String(eventData.categoryId),
