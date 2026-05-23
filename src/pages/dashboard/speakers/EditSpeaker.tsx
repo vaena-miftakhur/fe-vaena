@@ -22,7 +22,7 @@ export default function EditSpeaker() {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:3000/speakers/${id}`)
+        fetch(`https://be-v-production.up.railway.app/speakers/${id}`)
             .then(res => res.json())
             .then(data => {
                 setValue("name", data.name);
