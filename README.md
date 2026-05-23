@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Event Management System – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website manajemen event berbasis React TypeScript dengan autentikasi Zustand dan integrasi API ke backend Express.
 
-Currently, two official plugins are available:
+## 🌐 Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend (Vercel):** [https://fe-vaena.vercel.app/](https://fe-vaena.vercel.app/)
+- **Backend (Railway):** [https://be-v-production.up.railway.app/](https://be-v-production.up.railway.app/)
+- **Video Demo (YouTube):** [https://www.youtube.com/watch?v=0-wCwtFgxKI](https://www.youtube.com/watch?v=0-wCwtFgxKI)
 
-## React Compiler
+## 👤 Identitas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Nama:** Vaena Miftakhur Risko
+- **NIM:** 24090100
+- **Program Studi:** D-4 Teknik Informatika
+- **Fakultas:** Sekolah Vokasi
 
-## Expanding the ESLint configuration
+## 🛠️ Teknologi
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React + TypeScript
+- Zustand (state management & auth)
+- React Hook Form + Zod (validasi form)
+- React Router DOM (routing & protected routes)
+- Tailwind CSS
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Fitur
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Login manual menggunakan NIM dan Password
+- Protected Routes — halaman dashboard tidak bisa diakses tanpa login
+- CRUD Kategori, Pembicara, dan Event
+- Dropdown dinamis Kategori dan Pembicara saat tambah/edit Event
+- Menu Biodata mahasiswa
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Cara Menjalankan Lokal
+
+```bash
+# Clone repo
+git clone https://github.com/vaena-miftakhur/fe-vaena.git
+cd repo-frontend
+
+# Install dependencies
+npm install
+
+# Jalankan dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Struktur Folder
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/       # Komponen reusable (FormInput, Button, dll)
+├── pages/
+│   ├── auth/         # Halaman login
+│   └── dashboard/
+│       ├── category/ # CRUD Kategori
+│       ├── speakers/ # CRUD Pembicara
+│       ├── events/   # CRUD Event
+│       └── biodata/  # Halaman Biodata
+├── store/            # Zustand store (auth state)
+└── routes/           # Protected Routes
 ```
